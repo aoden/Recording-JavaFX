@@ -14,7 +14,7 @@ public class Main {
         Engine engine = new BasicEngine();
         AudioInput audioSource = new BasicAudioInput();
         AudioOutput audioOut = new AudioFileWriter();
-        GUIManager gui = new InterviewGUIManager();
+        GUIManager gui = new WebGuiManager();
         NoiseFilter noise = new SimpleNoiseFilter();
 
         //Configure the components
