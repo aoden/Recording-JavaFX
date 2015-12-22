@@ -5,7 +5,6 @@ import graphics.MultiLineGraphPanel;
 import music.AbstractGUIManager;
 import music.Recorder;
 import music.data.DataFrame;
-import music.data.calc.NoteConverter;
 
 import java.awt.*;
 import java.util.*;
@@ -18,7 +17,7 @@ public class WebGuiManager extends AbstractGUIManager {
     public void initialize() {
         super.initialize();
 
-        pitchPanel = new MultiLineGraphPanel(800, 1, 50, "Pitch/Loudness/Brighness", 800, 600);
+        pitchPanel = new MultiLineGraphPanel(1000, 1, 50, "Pitch", 1000, 300);
         pitchPanel.getGraph().setColor(0, Color.green);
         pitchPanel.getGraph().setConnectPoints(0, false);
         pitchPanel.getGraph().setVerticalRange(0, 40, 110);
