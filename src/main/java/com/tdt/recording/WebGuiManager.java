@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 public class WebGuiManager extends AbstractGUIManager {
 
-    MultiLineGraphPanel pitchPanel;
+    com.tdt.recording.ui.MultiLineGraphPanel pitchPanel;
     RecordPanel recordPanel = new RecordPanel();
 
     ChartPanel chartPanel;
@@ -36,7 +36,7 @@ public class WebGuiManager extends AbstractGUIManager {
         this.chartPanel = chartPanel;
     }
 
-    public MultiLineGraphPanel getPitchPanel() {
+    public com.tdt.recording.ui.MultiLineGraphPanel getPitchPanel() {
         return pitchPanel;
     }
 
@@ -46,7 +46,7 @@ public class WebGuiManager extends AbstractGUIManager {
 
     private ChartPanel showVisualization() {
 
-        coms = getPitchPanel().getWindow().getComponents();
+//        coms = getPitchPanel().getWindow().getComponents();
         return this.pitchPanel.getPanel();
     }
 
@@ -55,7 +55,7 @@ public class WebGuiManager extends AbstractGUIManager {
 
         this.recordPanel = new RecordPanel(getAudioComponents());
 
-        pitchPanel = new MultiLineGraphPanel(1000, 1, 50, "Pitch", 1000, 300);
+        pitchPanel = new com.tdt.recording.ui.MultiLineGraphPanel(1000, 1, 50, "Pitch", 1000, 300);
         pitchPanel.getGraph().setColor(0, Color.green);
         pitchPanel.getGraph().setConnectPoints(0, false);
         pitchPanel.getGraph().setVerticalRange(0, 40, 110);
@@ -136,4 +136,9 @@ public class WebGuiManager extends AbstractGUIManager {
         });
     }
 
+    @Override
+    public void start() {
+//        this.pitchPanel.getWindow().dispose();
+        this.pollingThread.start();
+    }
 }

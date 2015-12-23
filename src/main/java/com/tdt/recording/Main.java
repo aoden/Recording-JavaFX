@@ -6,7 +6,6 @@ import music.*;
 import javax.sound.sampled.AudioFormat;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Component;
 
 public class Main {
 
@@ -47,8 +46,10 @@ public class Main {
 
         JFrame frame = new JFrame();
         frame.setPreferredSize(new Dimension(800, 300));
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
         frame.add(gui.getRecordPanel());
-        frame.add(gui.getChartPanel());
+        frame.add(gui.getPitchPanel().getPanel());
+        frame.revalidate();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
