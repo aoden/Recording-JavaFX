@@ -46,16 +46,14 @@ public class Main extends RecordingApp {
 
         components.initialize();
 
-//        JFrame frame = new JFrame();
-//        frame.setPreferredSize(new Dimension(800, 300));
-//        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-//        frame.add(gui.getRecordPanel());
-//        frame.add(gui.getPitchPanel().getPanel());
-//        frame.pack();
-//        frame.show();
+        JPanel frame = new JPanel();
+        frame.setPreferredSize(new Dimension(800, 300));
+        frame.setLayout(new BoxLayout(frame, BoxLayout.Y_AXIS));
+        frame.add(gui.getRecordPanel());
+        frame.add(gui.getPitchPanel().getPanel());
 
         components.start();
-        RecordingApp recordingApp = new RecordingApp(gui.getPitchPanel().getPanel());
+        RecordingApp recordingApp = new RecordingApp(frame);
         recordingApp.launch();
     }
 }
