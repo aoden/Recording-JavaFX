@@ -3,7 +3,6 @@ package com.tdt.recording;
 
 import com.tdt.recording.ui.RecordPanel;
 import graphics.ChartPanel;
-import graphics.MultiLineGraphPanel;
 import music.AbstractGUIManager;
 import music.Recorder;
 import music.data.DataFrame;
@@ -15,7 +14,7 @@ import java.util.Arrays;
 public class WebGuiManager extends AbstractGUIManager {
 
     com.tdt.recording.ui.MultiLineGraphPanel pitchPanel;
-    RecordPanel recordPanel = new RecordPanel();
+    RecordPanel recordPanel;
 
     ChartPanel chartPanel;
     private Component[] coms;

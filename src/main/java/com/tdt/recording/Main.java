@@ -2,6 +2,7 @@ package com.tdt.recording;
 
 
 import music.*;
+import music.AudioOutput;
 
 import javax.sound.sampled.AudioFormat;
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class Main {
         Recorder recorder = new QueueRecorder();
         Engine engine = new BasicEngine();
         AudioInput audioSource = new BasicAudioInput();
-        AudioOutput audioOut = new AudioFileWriter();
+        AudioOutput audioOut = new com.tdt.recording.audio.AudioFileWriter();
         WebGuiManager gui = new WebGuiManager();
         NoiseFilter noise = new SimpleNoiseFilter();
 

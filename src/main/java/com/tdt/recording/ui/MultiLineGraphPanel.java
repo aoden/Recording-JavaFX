@@ -5,7 +5,6 @@
 
 package com.tdt.recording.ui;
 
-import graphics.GraphPanel;
 import graphics.MultiLineGraph;
 
 import java.util.ArrayList;

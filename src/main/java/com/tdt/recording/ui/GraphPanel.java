@@ -7,7 +7,6 @@ package com.tdt.recording.ui;
 
 import graphics.ChartPanel;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
