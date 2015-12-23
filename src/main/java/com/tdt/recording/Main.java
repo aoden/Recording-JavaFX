@@ -1,6 +1,7 @@
 package com.tdt.recording;
 
 
+import com.tdt.recording.ui.RecordingApp;
 import music.*;
 import music.AudioOutput;
 
@@ -8,7 +9,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.swing.*;
 import java.awt.*;
 
-public class Main {
+public class Main extends RecordingApp {
 
     public static void main(String[] args) {
 
@@ -45,16 +46,16 @@ public class Main {
 
         components.initialize();
 
-        JFrame frame = new JFrame();
-        frame.setPreferredSize(new Dimension(800, 300));
-        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-        frame.add(gui.getRecordPanel());
-        frame.add(gui.getPitchPanel().getPanel());
-        frame.revalidate();
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
+//        JFrame frame = new JFrame();
+//        frame.setPreferredSize(new Dimension(800, 300));
+//        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+//        frame.add(gui.getRecordPanel());
+//        frame.add(gui.getPitchPanel().getPanel());
+//        frame.pack();
+//        frame.show();
 
         components.start();
+        RecordingApp recordingApp = new RecordingApp(gui.getPitchPanel().getPanel());
+        recordingApp.launch();
     }
 }
