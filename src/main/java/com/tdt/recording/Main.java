@@ -4,6 +4,9 @@ package com.tdt.recording;
 import music.*;
 
 import javax.sound.sampled.AudioFormat;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.Component;
 
 public class Main {
 
@@ -14,7 +17,7 @@ public class Main {
         Engine engine = new BasicEngine();
         AudioInput audioSource = new BasicAudioInput();
         AudioOutput audioOut = new AudioFileWriter();
-        GUIManager gui = new WebGuiManager();
+        WebGuiManager gui = new WebGuiManager();
         NoiseFilter noise = new SimpleNoiseFilter();
 
         //Configure the components
@@ -42,7 +45,14 @@ public class Main {
 
         components.initialize();
 
-        components.start();
+        JFrame frame = new JFrame();
+        frame.setPreferredSize(new Dimension(800, 300));
+        frame.add(gui.getRecordPanel());
+        frame.add(gui.getChartPanel());
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.pack();
 
+        components.start();
     }
 }

@@ -1,21 +1,59 @@
 package com.tdt.recording;
 
 
+import com.tdt.recording.ui.RecordPanel;
+import graphics.ChartPanel;
 import graphics.MultiLineGraphPanel;
 import music.AbstractGUIManager;
 import music.Recorder;
 import music.data.DataFrame;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WebGuiManager extends AbstractGUIManager {
 
     MultiLineGraphPanel pitchPanel;
+    RecordPanel recordPanel = new RecordPanel();
+
+    ChartPanel chartPanel;
+    private Component[] coms;
+
+    public Component[] getComs() {
+        return coms;
+    }
+
+    public void setComs(Component[] coms) {
+        this.coms = coms;
+    }
+
+    public ChartPanel getChartPanel() {
+        return chartPanel;
+    }
+
+    public void setChartPanel(ChartPanel chartPanel) {
+        this.chartPanel = chartPanel;
+    }
+
+    public MultiLineGraphPanel getPitchPanel() {
+        return pitchPanel;
+    }
+
+    public RecordPanel getRecordPanel() {
+        return recordPanel;
+    }
+
+    private ChartPanel showVisualization() {
+
+        coms = getPitchPanel().getWindow().getComponents();
+        return this.pitchPanel.getPanel();
+    }
 
     @Override
     public void initialize() {
-        super.initialize();
+
+        this.recordPanel = new RecordPanel(getAudioComponents());
 
         pitchPanel = new MultiLineGraphPanel(1000, 1, 50, "Pitch", 1000, 300);
         pitchPanel.getGraph().setColor(0, Color.green);
@@ -23,7 +61,8 @@ public class WebGuiManager extends AbstractGUIManager {
         pitchPanel.getGraph().setVerticalRange(0, 40, 110);
         pitchPanel.getGraph().plotMinValue(0, false);
         pitchPanel.getGraph().setLabel(0, "Pitch");
-        addGraphPanel("Pitch", pitchPanel);
+
+        setChartPanel(showVisualization());
 
         setupThread(new Runnable() {
 
@@ -68,13 +107,16 @@ public class WebGuiManager extends AbstractGUIManager {
                                     for (int j = 0; j < ps.length; j++) {
                                         flatPS[j] = Math.pow(flatPS[j], 0.3);
                                     }
-                                    if (pitchPanel.isVisible()) {
-                                        ArrayList<Double> values = new ArrayList<Double>();
-                                        values.add(pitch);
-                                        pitchPanel.graph(values);
-                                    }
+                                }
+
+                                if (pitchPanel.isVisible()) {
+                                    ArrayList<Double> values = new ArrayList<Double>();
+                                    values.add(pitch);
+                                    pitchPanel.graph(values);
                                 }
                             }
+
+                            pitchPanel.repaint();
 
                             lastGraphedTime = frame.getTime();
                         }
