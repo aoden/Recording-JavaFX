@@ -1,26 +1,41 @@
-package com.tdt.recording;
-
-
-import com.tdt.recording.ui.RecordingApp;
-import music.*;
-import music.AudioOutput;
+/*
+ * Music Visualizations: http:/github.com/michaelbrooks/music-visualization
+ * Copyright 2012, Michael Brooks. BSD License.
+ */
+package music;
 
 import javax.sound.sampled.AudioFormat;
-import javax.swing.*;
-import java.awt.*;
 
-public class Main extends RecordingApp {
+/**
+ *
+ * @author michael
+ */
+public class Main {
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
-
+                
+        String fname = null;
+        if (args.length > 0) {
+            fname = args[0];
+        }
+        //fname = "samples/combo.wav";
+        
         //Create all the components
         Recorder recorder = new QueueRecorder();
         Engine engine = new BasicEngine();
-        AudioInput audioSource = new BasicAudioInput();
-        AudioOutput audioOut = new com.tdt.recording.audio.AudioFileWriter();
-        WebGuiManager gui = new WebGuiManager();
+        AudioInput audioSource;
+        if (fname != null) {
+            audioSource = new BasicAudioFileInput(fname);
+        } else {
+            audioSource = new BasicAudioInput();
+        }
+        AudioOutput audioOut = new AudioFileWriter();
+        GUIManager gui = new InterviewGUIManager();
         NoiseFilter noise = new SimpleNoiseFilter();
-
+        
         //Configure the components
         AudioFormat audioInputFormat = new AudioFormat(
                 AudioFormat.Encoding.PCM_SIGNED,
@@ -40,20 +55,13 @@ public class Main extends RecordingApp {
         components.setAudioOutput(audioOut);
         components.setNoiseFilter(noise);
 
-        noise.setEnabled(true);
-
+        noise.setEnabled(false);
+        
         //Run the components
 
         components.initialize();
 
-        JPanel frame = new JPanel();
-        frame.setPreferredSize(new Dimension(800, 300));
-        frame.setLayout(new BoxLayout(frame, BoxLayout.Y_AXIS));
-        frame.add(gui.getRecordPanel());
-        frame.add(gui.getPitchPanel().getPanel());
-
         components.start();
-        component = frame;
-        launch();
+
     }
 }
